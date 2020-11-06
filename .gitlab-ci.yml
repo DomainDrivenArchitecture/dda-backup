@@ -1,0 +1,15 @@
+image: docker:19.03.12
+
+services:
+  - docker:19.03.12-dind
+
+before_script:
+  - echo "Hallo"
+
+build:
+  stage: build
+  script:
+    - docker pull ubuntu:latest || true
+    #- docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    #- docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    #- docker push $CI_REGISTRY_IMAGE:latest
