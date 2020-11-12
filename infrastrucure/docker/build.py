@@ -18,7 +18,7 @@ def initialize(project):
     stage = 'notused'
     dockerhub_user = 'notused'
     dockerhub_password = 'notused'
-     config = create_devops_docker_build_config(
+    config = create_devops_docker_build_config(
         stage, PROJECT_ROOT_PATH, MODULE, dockerhub_user, dockerhub_password)
     build = MyBuild(project, config)
     build.initialize_build_dir()
