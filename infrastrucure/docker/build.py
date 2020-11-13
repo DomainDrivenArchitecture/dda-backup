@@ -37,3 +37,9 @@ def drun(project):
 def test(project):
     build = get_devops_build(project)
     build.test()
+
+@task
+def publish(project):
+    build = get_devops_build(project)
+    build.dockerhub_login()
+    build.dockerhub_publish()
