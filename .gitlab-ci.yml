@@ -10,7 +10,7 @@ services:
 
 before_script:
   - set -eux; apk add --no-cache python3 py3-pip;
-  - pip3 install pybuilder ddadevops deprecation python-terraform --user
+  - pip3 install pybuilder ddadevops deprecation python-terraform boto3 mfa --user
   - export PATH=$PATH:~/.local/bin
 
 build:
