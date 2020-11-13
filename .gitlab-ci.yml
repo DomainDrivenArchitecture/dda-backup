@@ -9,7 +9,7 @@ services:
   - docker:19.03.12-dind
 
 before_script:
-  - set -eux; apk add --no-cache build-base python3 py3-pip;
+  - set -eux; apk add --no-cache build-base python3 py3-pip py3-setuptools;
   - pip3 install pybuilder ddadevops deprecation python-terraform boto3 mfa --user
   - export PATH=$PATH:~/.local/bin
 
