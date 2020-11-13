@@ -4,10 +4,9 @@ FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
 
 
-RUN apt-get update
-RUN apt-get install restic  ca-certificates -y
-
-RUN update-ca-certificates
+RUN apt-get update > /dev/null \
+    apt-get install restic ca-certificates -y > /dev/null \
+    update-ca-certificates
 
 
 # This will install the latest postgresql version
