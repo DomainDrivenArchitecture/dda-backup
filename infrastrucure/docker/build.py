@@ -1,10 +1,9 @@
-from subprocess import run
 from os import environ
 from pybuilder.core import task, init
 from ddadevops import *
 import logging
 
-name = 'meissa-cloud'
+name = 'dda-backup'
 MODULE = 'docker'
 PROJECT_ROOT_PATH = '../..'
 
@@ -16,8 +15,8 @@ class MyBuild(DevopsDockerBuild):
 def initialize(project):
     project.build_depends_on('ddadevops>=0.6.1')
     stage = 'notused'
-    dockerhub_user = 'notused'
-    dockerhub_password = 'notused'
+    dockerhub_user = environ.get('DOCKERHUB_USER', None)
+    dockerhub_password = environ.get('DOCKERHUB_PASSWORD', None)
     config = create_devops_docker_build_config(
         stage, PROJECT_ROOT_PATH, MODULE, dockerhub_user, dockerhub_password)
     build = MyBuild(project, config)

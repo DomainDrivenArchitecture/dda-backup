@@ -16,4 +16,4 @@ before_script:
 build:
   stage: build
   script:
-    - cd infrastrucure/docker && pyb image test
+    - cd infrastrucure/docker && pyb image test publish
