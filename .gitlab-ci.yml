@@ -9,7 +9,10 @@ services:
   - docker:19.03.12-dind
 
 before_script:
-  - echo "Hallo"
+  - set -eux; apk add --no-cache python3 py3-pip;
+  - pip3 install pip3 --upgrade --user
+  - pip3 install pybuilder ddadevops deprecation --user
+  - export PATH=$PATH:~/.local/bin
 
 build:
   stage: build
