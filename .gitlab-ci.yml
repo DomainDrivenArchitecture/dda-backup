@@ -21,4 +21,4 @@ build:
 test:
   stage: test
   script:
-    - cd infrastrucure/docker && pyb image
+    - cd infrastrucure/docker && pyb test
