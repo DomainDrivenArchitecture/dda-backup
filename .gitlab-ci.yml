@@ -1,4 +1,4 @@
-image: docker:19.03.12
+image:  domaindrivenarchitecture/dda-devops-build:latest
 
 stages:
   - build
@@ -7,11 +7,6 @@ stages:
 
 services:
   - docker:19.03.12-dind
-
-before_script:
-  - set -eux; apk add --no-cache build-base python3 python3-dev py3-pip py3-setuptools py3-wheel libffi-dev openssl-dev;
-  - pip3 install pybuilder ddadevops deprecation python-terraform boto3 mfa
-  - export PATH=$PATH:~/.local/bin
 
 build:
   stage: build
