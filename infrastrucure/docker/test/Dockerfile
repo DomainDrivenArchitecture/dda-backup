@@ -1,7 +1,8 @@
 FROM meissa-cloud
 
-RUN curl -L -o /tmp/serverspec.jar \
-    https://github.com/DomainDrivenArchitecture/dda-serverspec-crate/releases/download/1.3.4/dda-serverspec-standalone.jar
+RUN apt-get -yqq install curl > /dev/null
+
+RUN curl -L -o /app/serverspec.jar https://github.com/DomainDrivenArchitecture/dda-serverspec-crate/releases/download/2.0.0/dda-serverspec-standalone.jar
 
 COPY serverspec.edn /tmp/serverspec.edn
 
