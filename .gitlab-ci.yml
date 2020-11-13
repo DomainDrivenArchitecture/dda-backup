@@ -10,7 +10,6 @@ services:
 
 before_script:
   - set -eux; apk add --no-cache python3 py3-pip;
-  - pip3 install pip3 --upgrade --user
   - pip3 install pybuilder ddadevops deprecation --user
   - export PATH=$PATH:~/.local/bin
 
