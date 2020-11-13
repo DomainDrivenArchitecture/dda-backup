@@ -4,8 +4,8 @@ FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
 
 
-RUN apt-get update > /dev/null \
-    apt-get install restic ca-certificates -y > /dev/null \
+RUN apt-get update > /dev/null; \
+    apt-get install restic ca-certificates -y > /dev/null; \
     update-ca-certificates
 
 
