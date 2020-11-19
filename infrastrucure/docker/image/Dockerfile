@@ -25,3 +25,4 @@ RUN apt-get -y install postgresql
 
 # Prepare Entrypoint Script
 ADD resources /tmp/resources
+RUN chmod 700 /tmp/resources/entrypoint.sh /tmp/resources/create_pg_pass.sh
