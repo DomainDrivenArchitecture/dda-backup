@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./create_pg_pass.sh
+/tmp/resources/create_pg_pass.sh
 
 # Idle process
 while true; do 
