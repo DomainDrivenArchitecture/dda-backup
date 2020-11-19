@@ -21,3 +21,7 @@ RUN apt-get update
 # Install the latest version of PostgreSQL.
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
 RUN apt-get -y install postgresql
+
+
+# Prepare Entrypoint Script
+ADD resources /tmp/resources
