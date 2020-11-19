@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ./create_pg_pass.sh
 
 # Idle process
