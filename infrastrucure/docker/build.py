@@ -15,8 +15,8 @@ class MyBuild(DevopsDockerBuild):
 def initialize(project):
     project.build_depends_on('ddadevops>=0.6.1')
     stage = 'notused'
-    dockerhub_user = environ.get('DOCKERHUB_USER', None)
-    dockerhub_password = environ.get('DOCKERHUB_PASSWORD', None)
+    dockerhub_user = environ.get('DOCKERHUB_USER', gopass_field_from_path('meissa/web/docker.com', 'login'))
+    dockerhub_password = environ.get('DOCKERHUB_PASSWORD', gopass_password_from_path('meissa/web/docker.com'))
     config = create_devops_docker_build_config(
         stage, PROJECT_ROOT_PATH, MODULE, dockerhub_user, dockerhub_password)
     build = MyBuild(project, config)
