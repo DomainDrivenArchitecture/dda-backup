@@ -10,4 +10,4 @@ psql -d template1 -h $POSTGRES_SERVICE -p $POSTGRES_PORT -U $(cat ${POSTGRES_USE
 # create folder from db backup
 restic -r $RESTIC_REPOSITORY restore $2 --target test-stdin-$2
 # read folder and restore db entries
-psql -d $(cat ${POSTGRES_DB_FILE}) -h $POSTGRES_SERVICE -p $POSTGRES_PORT -U $(cat ${POSTGRES_USER_FILE}) --no-password < test-stdin-$2
+psql -d $(cat ${POSTGRES_DB_FILE}) -h $POSTGRES_SERVICE -p $POSTGRES_PORT -U $(cat ${POSTGRES_USER_FILE}) --no-password < test-stdin-$2/stdin
