@@ -1,6 +1,6 @@
-FROM meissa-cloud
+FROM dda-backup
 
-RUN apt-get -yqq install curl openjdk-11-jre > /dev/null
+RUN apt -yqq install openjdk-13-jre-headless > /dev/null
 
 RUN curl -L -o /tmp/serverspec.jar https://github.com/DomainDrivenArchitecture/dda-serverspec-crate/releases/download/2.0.0/dda-serverspec-standalone.jar
 

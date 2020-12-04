@@ -1,4 +1,7 @@
+#!/bin/bash
+
 # Restore Nextcloud Filesystem
+# TODO: describe input params
 
 # Reads restore snapshot_ID from first CLI Argument
 restic -r $RESTIC_REPOSITORY restore $1 --target /
