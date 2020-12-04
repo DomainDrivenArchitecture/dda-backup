@@ -24,5 +24,5 @@ RUN apt-get -y install postgresql-client-13
 
 
 # Prepare Entrypoint Script
-ADD resources /usr/local/bin/resources
-RUN chmod 700 /usr/local/bin/resources/entrypoint.sh /usr/local/bin/resources/create_pgpass.sh /usr/local/bin/resources/backup.sh /usr/local/bin/resources/restore.sh
+ADD resources /usr/local/bin/
+RUN chmod 700 /usr/local/bin/entrypoint.sh /usr/local/bin/create_pgpass.sh /usr/local/bin/backup.sh /usr/local/bin/restore.sh
