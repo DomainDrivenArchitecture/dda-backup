@@ -2,9 +2,25 @@
 
 set -o pipefail
 
-# backup database dump
-pg_dump -d $(cat ${POSTGRES_DB_FILE}) -h  $POSTGRES_SERVICE -p $POSTGRES_PORT -U $(cat ${POSTGRES_USER_FILE}) --no-password --serializable-deferrable --clean --no-privileges | \
-restic -r $RESTIC_REPOSITORY/db backup --stdin
+function main() {
+    file_env AWS_ACCESS_KEY_ID
+    file_env AWS_SECRET_ACCESS_KEY
 
-# backup nextcloud filesystem
-restic -r $RESTIC_REPOSITORY/files backup /var/backups/
+    file_env POSTGRES_DB
+    file_env POSTGRES_PASSWORD
+    file_env POSTGRES_USER
+
+    file_env RESTIC_PASSWORD_FILE
+
+    # backup database dump
+    pg_dump -d ${POSTGRES_DB} -h  ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} \
+        -U ${POSTGRES_USER_FILE} --no-password --serializable-deferrable \
+        --clean --no-privileges | \
+        restic -r ${RESTIC_REPOSITORY}/db backup --stdin
+
+    # backup nextcloud filesystem
+    restic -r ${RESTIC_REPOSITORY}/files backup /var/backups/
+}
+
+source /usr/local/lib/funtions.sh
+main

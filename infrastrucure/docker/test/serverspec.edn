@@ -1,6 +1,7 @@
 {:package [{:name "restic"}
            {:name "postgresql-client-13"}]
   :file [{:path "/entrypoint.sh" :mod "700"}
+         {:path "/usr/local/lib/functions.sh" :mod "400"}
          {:path "/usr/local/bin/init.sh" :mod "700"}
          {:path "/usr/local/bin/backup.sh" :mod "700"}
          {:path "/usr/local/bin/restore.sh" :mod "700"}]}

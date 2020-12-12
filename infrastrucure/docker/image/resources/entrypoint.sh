@@ -1,10 +1,19 @@
 #!/bin/bash
 
-echo "${POSTGRES_HOST}:$(cat ${POSTGRES_DB_FILE}):$(cat ${POSTGRES_USER_FILE}):$(cat ${POSTGRES_PASSWORD_FILE})" > /root/.pgpass
-echo "${POSTGRES_HOST}:template1:$(cat ${POSTGRES_USER_FILE}):$(cat ${POSTGRES_PASSWORD_FILE})" >> /root/.pgpass
-chmod 0600 /root/.pgpass
+function main() {
+    file_env POSTGRES_DB
+    file_env POSTGRES_PASSWORD
+    file_env POSTGRES_USER
 
-# Idle process
-while true; do 
-	sleep 500000
-done
+    echo "${POSTGRES_HOST}:${POSTGRES_DB}:${POSTGRES_USER}:${POSTGRES_PASSWORD}" > /root/.pgpass
+	echo "${POSTGRES_HOST}:template1:${POSTGRES_USER}:${POSTGRES_PASSWORD}" >> /root/.pgpass
+	chmod 0600 /root/.pgpass
+
+	# Idle process
+	while true; do 
+		sleep 500000
+	done
+}
+
+source /usr/local/lib/funtions.sh
+main
