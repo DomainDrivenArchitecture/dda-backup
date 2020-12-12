@@ -10,7 +10,7 @@ apt-get -qqy install wget postgresql-client-13 restic > /dev/null;
 
 update-ca-certificates
 
-install -m 0700 /tmp/entrypoint.sh /usr/local/bin/
+install -m 0700 /tmp/entrypoint.sh /
 install -m 0700 /tmp/init.sh /usr/local/bin/
 install -m 0700 /tmp/backup.sh /usr/local/bin/
 install -m 0700 /tmp/restore.sh /usr/local/bin/
