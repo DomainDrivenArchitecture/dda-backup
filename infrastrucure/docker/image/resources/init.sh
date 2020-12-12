@@ -10,5 +10,5 @@ function main() {
     restic -r ${RESTIC_REPOSITORY}/files --verbose init
 }
 
-source /usr/local/lib/funtions.sh
+source /usr/local/lib/functions.sh
 main

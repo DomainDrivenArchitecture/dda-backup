@@ -22,5 +22,5 @@ function main() {
     restic -r ${RESTIC_REPOSITORY}/files backup /var/backups/
 }
 
-source /usr/local/lib/funtions.sh
+source /usr/local/lib/functions.sh
 main

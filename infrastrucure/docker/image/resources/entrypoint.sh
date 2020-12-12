@@ -15,5 +15,5 @@ function main() {
 	done
 }
 
-source /usr/local/lib/funtions.sh
+source /usr/local/lib/functions.sh
 main
