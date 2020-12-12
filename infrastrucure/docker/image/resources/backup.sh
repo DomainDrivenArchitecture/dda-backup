@@ -19,7 +19,7 @@ function main() {
         restic -r ${RESTIC_REPOSITORY}/db backup --stdin
 
     # backup nextcloud filesystem
-    restic -r ${RESTIC_REPOSITORY}/files backup /var/backups/
+    cd /var/backups/ && restic -r ${RESTIC_REPOSITORY}/files backup .
 }
 
 source /usr/local/lib/functions.sh

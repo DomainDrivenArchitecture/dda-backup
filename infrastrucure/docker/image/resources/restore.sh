@@ -13,7 +13,7 @@ function main() {
 
     # files
     rm -rf /var/backups/*
-    restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
+    restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backup/
 
     # db
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
