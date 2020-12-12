@@ -12,6 +12,7 @@ function main() {
     file_env RESTIC_PASSWORD_FILE
 
     # files
+    rm -rf /var/backups/*
     restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
 
     # db
@@ -25,6 +26,6 @@ function main() {
 
 }
 
-source /usr/local/lib/funtions.sh
+source /usr/local/lib/functions.sh
 main
 
