@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -o pipefail
 
 function main() {
     file_env AWS_ACCESS_KEY_ID
@@ -9,11 +10,11 @@ function main() {
     file_env POSTGRES_PASSWORD
     file_env POSTGRES_USER
 
-    file_env RESTIC_PASSWORD_FILE
+    file_env RESTIC_PASSWORD
 
     # files
     rm -rf /var/backups/*
-    restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backup/
+    restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
 
     # db
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
