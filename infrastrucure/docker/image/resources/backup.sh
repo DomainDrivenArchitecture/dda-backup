@@ -14,8 +14,7 @@ function main() {
 
     # backup database dump
     pg_dump -d ${POSTGRES_DB} -h  ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} \
-        -U ${POSTGRES_USER_FILE} --no-password --serializable-deferrable \
-        --no-privileges | \
+        -U ${POSTGRES_USER_FILE} --no-password --serializable-deferrable | \
         restic -r ${RESTIC_REPOSITORY}/db backup --stdin
 
     # backup nextcloud filesystem
