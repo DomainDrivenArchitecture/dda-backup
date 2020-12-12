@@ -7,6 +7,7 @@ function main() {
     file_env RESTIC_PASSWORD_FILE
 
     restic -r ${RESTIC_REPOSITORY}/db --verbose init
+    restic -r ${RESTIC_REPOSITORY}/db-role --verbose init
     restic -r ${RESTIC_REPOSITORY}/files --verbose init
 }
 

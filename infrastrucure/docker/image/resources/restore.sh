@@ -14,14 +14,21 @@ function main() {
 
     # files
     rm -rf /var/backups/*
-    restic -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
+    restic -v -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
 
     # db
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password -c "DROP DATABASE \"${POSTGRES_DB}\";"
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password -c "CREATE DATABASE \"${POSTGRES_DB}\";"
-    restic -r ${RESTIC_REPOSITORY}/db restore latest --target test-stdin
+
+    # TODO: restore roles
+    psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
+        --no-password -c "CREATE ROLE oc_...;"
+    psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
+        --no-password -c "ALTER ROLE oc_... WITH NOSUPERUSER INHERIT NOCREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5...';"
+
+    restic -v -r ${RESTIC_REPOSITORY}/db restore latest --target test-stdin
     psql -d ${POSTGRES_DB} -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password < test-stdin/stdin
 
