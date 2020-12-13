@@ -6,9 +6,9 @@ function main() {
 
     file_env RESTIC_PASSWORD_FILE
 
-    restic -r ${RESTIC_REPOSITORY}/db --verbose init
-    restic -r ${RESTIC_REPOSITORY}/db-role --verbose init
-    restic -r ${RESTIC_REPOSITORY}/files --verbose init
+    restic -r ${RESTIC_REPOSITORY}/pg-role -v init
+    restic -r ${RESTIC_REPOSITORY}/pg-database -v init
+    restic -r ${RESTIC_REPOSITORY}/files -v init
 }
 
 source /usr/local/lib/functions.sh

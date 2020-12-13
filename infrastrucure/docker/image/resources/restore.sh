@@ -12,26 +12,28 @@ function main() {
 
     file_env RESTIC_PASSWORD
 
-    # files
-    rm -rf /var/backups/*
-    restic -v -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
-
-    # db
+    # create new db
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password -c "DROP DATABASE \"${POSTGRES_DB}\";"
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password -c "CREATE DATABASE \"${POSTGRES_DB}\";"
 
-    # TODO: restore roles
-    psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
-        --no-password -c "CREATE ROLE oc_...;"
-    psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
-        --no-password -c "ALTER ROLE oc_... WITH NOSUPERUSER INHERIT NOCREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5...';"
+    # restore roles
+    restic -v -r ${RESTIC_REPOSITORY}/pg-role dump latest stdin | \
+        psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
+        --no-password
 
-    restic -v -r ${RESTIC_REPOSITORY}/db restore latest --target test-stdin
-    psql -d ${POSTGRES_DB} -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
-        --no-password < test-stdin/stdin
+    # restore db
+    restic -v -r ${RESTIC_REPOSITORY}/pg-database dump latest stdin | \
+        psql -d ${POSTGRES_DB} -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
+        --no-password
 
+    # files
+    rm -rf /var/backups/*
+    restic -v -r $RESTIC_REPOSITORY/files restore latest --target /var/backups/
+
+    # adjust trusted domains
+    php /var/www/html/occ config:system:set trusted_domains 1 --value=cloud.test.meissa-gmbh.de
 }
 
 source /usr/local/lib/functions.sh
