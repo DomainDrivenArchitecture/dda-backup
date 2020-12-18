@@ -3,6 +3,10 @@
 set -o pipefail
 
 function main() {
+
+    #Start maintenance mode
+    /usr/local/bin/start-maintenance.sh
+
     file_env AWS_ACCESS_KEY_ID
     file_env AWS_SECRET_ACCESS_KEY
 
@@ -37,6 +41,9 @@ function main() {
     cd /var/backups/ && restic -v -r ${RESTIC_REPOSITORY}/files backup .
 
     restic -v -r ${RESTIC_REPOSITORY}/files forget --keep-last 1 --keep-within ${RESTIC_DAYS_TO_KEEP}d --prune
+
+    #End maintenance mode
+    /usr/local/bin/end-maintenance.sh
 }
 
 source /usr/local/lib/functions.sh
