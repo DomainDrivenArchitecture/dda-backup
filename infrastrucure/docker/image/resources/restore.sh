@@ -5,7 +5,7 @@ set -Eeo pipefail
 function main() {
 
     #Start maintenance mode
-    /usr/local/bin/start-maintenance.sh
+    #/usr/local/bin/start-maintenance.sh
 
     file_env AWS_ACCESS_KEY_ID
     file_env AWS_SECRET_ACCESS_KEY
@@ -43,7 +43,7 @@ function main() {
     php /var/www/html/occ config:system:set trusted_domains 1 --value=cloud.test.meissa-gmbh.de
 
     #End maintenance mode
-    /usr/local/bin/end-maintenance.sh
+    #/usr/local/bin/end-maintenance.sh
 }
 
 source /usr/local/lib/functions.sh
