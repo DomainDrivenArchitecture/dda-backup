@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -o pipefail
+set -Eeo pipefail
 
 function main() {
 
@@ -21,6 +21,9 @@ function main() {
         --no-password -c "DROP DATABASE \"${POSTGRES_DB}\";"
     psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password -c "CREATE DATABASE \"${POSTGRES_DB}\";"
+
+    # init restic
+    restic -v -r ${RESTIC_REPOSITORY}/pg-role snapshots     
 
     # restore roles
     restic -r ${RESTIC_REPOSITORY}/pg-role dump latest stdin | \
