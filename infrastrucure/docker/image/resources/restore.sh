@@ -23,12 +23,12 @@ function main() {
         --no-password -c "CREATE DATABASE \"${POSTGRES_DB}\";"
 
     # restore roles
-    restic -v -r ${RESTIC_REPOSITORY}/pg-role dump latest stdin | \
+    restic -r ${RESTIC_REPOSITORY}/pg-role dump latest stdin | \
         psql -d template1 -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password
 
     # restore db
-    restic -v -r ${RESTIC_REPOSITORY}/pg-database dump latest stdin | \
+    restic -r ${RESTIC_REPOSITORY}/pg-database dump latest stdin | \
         psql -d ${POSTGRES_DB} -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U ${POSTGRES_USER} \
         --no-password
 
