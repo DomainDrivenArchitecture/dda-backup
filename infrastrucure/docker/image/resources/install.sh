@@ -11,5 +11,5 @@ apt-get -qqy install wget postgresql-client-13 restic > /dev/null;
 update-ca-certificates
 
 install -m 0400 /tmp/functions.sh /usr/local/lib/
-install -m 0400 /tmp/backup-pg-functions.sh /usr/local/lib/
-install -m 0400 /tmp/backup-file-functions.sh /usr/local/lib/
+install -m 0400 /tmp/pg-functions.sh /usr/local/lib/
+install -m 0400 /tmp/file-functions.sh /usr/local/lib/
