@@ -28,7 +28,7 @@ function backup-roles() {
 
   pg_dumpall -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} -U${POSTGRES_USER} --no-password --roles-only | \
       grep "${role_prefix}" | \
-      restic -v -r ${RESTIC_REPOSITORY}/pg-role backup --stdin
+      restic -r ${RESTIC_REPOSITORY}/pg-role backup --stdin
 
   restic -v -r ${RESTIC_REPOSITORY}/pg-role forget --keep-last 1 --keep-within ${RESTIC_DAYS_TO_KEEP}d --prune
 }
@@ -38,7 +38,7 @@ function backup-db-dump() {
 
   pg_dump -d ${POSTGRES_DB} -h ${POSTGRES_SERVICE} -p ${POSTGRES_PORT} \
       -U ${POSTGRES_USER} --no-password --serializable-deferrable | \
-      restic -v -r ${RESTIC_REPOSITORY}/pg-database backup --stdin
+      restic -r ${RESTIC_REPOSITORY}/pg-database backup --stdin
 
   restic -v -r ${RESTIC_REPOSITORY}/pg-database forget --keep-last 1 --keep-within ${RESTIC_DAYS_TO_KEEP}d --prune
 }
