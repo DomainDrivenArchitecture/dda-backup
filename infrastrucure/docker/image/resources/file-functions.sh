@@ -13,6 +13,17 @@ function backup-directory() {
   restic -v -r ${RESTIC_REPOSITORY}/files forget --keep-last 1 --keep-within ${RESTIC_DAYS_TO_KEEP}d --prune
 }
 
+# First arg is the directory, the remaining args are the sub-directories (relative to the first directory) to backup.
+function backup-fs-from-directory() {
+  local directory="$1"; shift
+
+  restic -v -r ${RESTIC_REPOSITORY}/files unlock --cleanup-cache
+
+  cd ${directory} && restic -v -r ${RESTIC_REPOSITORY}/files backup $@
+
+  restic -v -r ${RESTIC_REPOSITORY}/files forget --keep-last 1 --keep-within ${RESTIC_DAYS_TO_KEEP}d --prune
+}
+
 function restore-directory() {
   local directory="$1"; shift
 
