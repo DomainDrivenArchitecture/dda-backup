@@ -11,4 +11,4 @@ services:
 build:
   stage: build
   script:
-    - cd infrastrucure/docker && pyb image test publish
+    - cd infrastructure/docker && pyb image test publish
