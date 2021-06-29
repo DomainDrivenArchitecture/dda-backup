@@ -8,5 +8,5 @@
 Images are available at https://hub.docker.com/r/domaindrivenarchitecture/dda-backup
 
 ## License
-Copyright © 2020 meissa GmbH
+Copyright © 2021 meissa GmbH
 Published under [apache2.0 license](LICENSE.md)
